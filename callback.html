@@ -1,0 +1,10 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hubungkan TikTok</title><link rel="stylesheet" href="style.css"></head><body><main>
+<h1>Hubungkan TikTok</h1><div class="card" id="box"><p>Memuat…</p></div>
+<script>
+var p=new URLSearchParams(location.search),code=p.get('code'),err=p.get('error'),box=document.getElementById('box');
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+if(code){var cmd='/tiktok '+code;
+box.innerHTML='<p><b>Berhasil!</b> Salin perintah di bawah lalu kirim ke bot Telegram dalam 5 menit:</p><code id="c">'+esc(cmd)+'</code><button id="b">Salin perintah</button><p class="muted">Setelah dikirim, bot akan membalas “TikTok terhubung”.</p>';
+document.getElementById('b').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(cmd):Promise.reject()).then(function(){b.textContent='Tersalin ✓ — tempel di bot'}).catch(function(){var r=document.createRange();r.selectNodeContents(document.getElementById('c'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Tahan teks di atas lalu Salin'})};
+}else{box.innerHTML='<p>Login TikTok dibatalkan atau gagal'+(err?': '+esc(err):'')+'. Ulangi dari bot dengan /hubungkan_tiktok.</p>'}
+</script></main></body></html>
